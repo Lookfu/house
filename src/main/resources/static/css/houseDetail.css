@@ -1,0 +1,46 @@
+
+#head{
+    text-align:center;
+    font-size:40px;
+    font-weight: bold;
+    height: 60px;
+    background-color: #f1efeb;
+    padding: 20px 0;
+}
+
+#imgs{
+    float: left;
+    margin-left: 100px;
+}
+#mainImg{
+    width: 800px;
+    height: 500px;
+}
+
+.img{
+    width: 130px;
+    height: 90px;
+}
+#inf{
+    margin-left: 1000px;
+
+}
+#price{
+    font-size:40px;
+    font-weight: bold;
+    color: #f8020b;
+}
+#roomDetail{
+    font-size:20px;
+    font-weight: bold;
+}
+#button{
+    margin-left: 1000px;
+
+}
+.button{
+    width: 100px;
+    height: 50px;
+    margin: 20px;
+    background-color: #938ff1;
+}

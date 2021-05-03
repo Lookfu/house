@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>详情</title>
+    <link rel="stylesheet" type="text/css" href="../css/houseDetail.css">
+</head>
+<body>
+    <div id="house">
+        <header id="head">{{title}}</header>
+        <div id="detail">
+            <div id="imgs">
+                <img :src="img" id="mainImg">
+                <div>
+                    <img v-for="img of imgs" :src="img" @click="clickImg(img)" class="img">
+                </div>
+            </div>
+            <div id="inf">
+                <p id="price">{{price}}元/月</p>
+                <p id="roomDetail">{{room}}室{{hall}}厅 {{area}}平方米</p>
+                <p id="rating">评分：{{rating}}</p>
+                <p id="state">状态：{{state}}</p>
+                <p id="address">地址：{{address}}</p>
+                <p id="properties">属性：{{properties}}</p>
+                <p id="remarks">描述：{{remarks}}</p>
+            </div>
+            <div id="button">
+                <button class="button" @click="like(houseId)">收藏</button>
+                <button class="button" :disabled="enable">租房</button>
+            </div>
+        </div>
+    </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="../js/vue.js"></script>
+    <script src="../js/houseDetail.js"></script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.house.mapper.UserMapper">
+    <select id="getUserByEmail" resultType="user" >
+        select * from user where email=#{email};
+    </select>
+
+    <insert id="addUser" parameterType="user">
+        insert into user(email,password)
+        values (#{email},#{password});
+    </insert>
+
+    <update id="updateEnableByEmail">
+        update user set enable=#{enable} where email=#{email};
+    </update>
+</mapper>

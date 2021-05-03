@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SignIn</title>
+    <link rel="stylesheet" type="text/css" href="../css/sign_in.css"/>
+</head>
+<body>
+<div id="signIn">
+    <h1>Sign In</h1>
+        <input type="email" required="required" placeholder="邮箱" v-model="email"/>
+        <input type="password" required="required" placeholder="密码" v-model="password"/>
+        <input type="password" required="required" placeholder="确认密码" v-model="confirmPasswd"/>
+        <button class="but" @click="submit(email,password,confirmPasswd)">发送激活链接</button>
+</div>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="../js/vue.js"></script>
+<script src="../js/sign_in.js"></script>
+</body>
+</html>

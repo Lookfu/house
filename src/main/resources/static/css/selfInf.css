@@ -1,0 +1,17 @@
+body {
+    text-align: center;
+}
+
+#inf {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.img {
+    width: 200px;
+    height: 200px;
+}
+
+#selfInf{
+    margin-left: 1500px;
+}

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.house.mapper.HouseMapper">
+    <select id="houseListOfAll" resultType="house" >
+        select * from house limit #{limit} offset #{offset};
+    </select>
+
+    <select id="houseListOfSelves" resultType="house" >
+        select * from house where state=1 limit #{limit} offset #{offset};
+    </select>
+
+    <select id="houseListOfSelling" resultType="house" >
+        select * from house where type =1 and state =1 limit #{limit} offset #{offset};
+    </select>
+
+    <select id="houseListOfRenting" resultType="house" >
+        select * from house where type =2 and state =1 limit #{limit} offset #{offset};
+    </select>
+
+    <select id="houseDetail" resultType="house">
+        select *from house where id=#{id};
+    </select>
+</mapper>

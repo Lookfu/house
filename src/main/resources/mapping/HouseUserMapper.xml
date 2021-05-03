@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.house.mapper.HouseUserMapper">
+    <insert id="insertItem" parameterType="houseUser">
+        insert into house_user(house_id,user_id,type)
+        values (#{houseId},#{userId},#{type});
+    </insert>
+
+    <select id="countItem" resultType="int">
+        select count(*)
+        from house_user
+        where house_id=#{houseId} and user_id=#{userId} and type=#{type};
+    </select>
+
+    <select id="selectLikeHouses" resultType="houseUser">
+        select * from house_user
+        where user_id=#{userId} and type=2;
+    </select>
+</mapper>

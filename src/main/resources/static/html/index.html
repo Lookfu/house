@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>主界面</title>
+    <link rel="stylesheet" type="text/css" href="../css/index.css">
+</head>
+
+<body>
+    <aside class="box" id="test">
+        <button id="btn" onClick="bt()">三</button>
+        <ul>
+            <li><h3>菜单栏</h3>
+            </li>
+            <li><a href="../html/selfInf.html">个人信息</a></li>
+            <li><a href="../html/shop.html">房产百科</a></li>
+            <li><a href="#">我的收藏</a></li>
+            <li><a href="../html/order.html">订单大全</a></li>
+            <li><a href="#">帮助文档</a></li>
+            <li><a href="#">退出系统</a></li>
+            <li><a href="#">关于我们</a></li>
+        </ul>
+    </aside>
+    <section>
+        <h1>房屋租赁系统</h1>
+        <div id="finding">
+            <input  id="search">
+            <button id="searchButton">查询</button>
+        </div>
+
+        <div id="houseList">
+            <div @click="send(house.id)" v-for="house of houses" class="house">
+                <img :src="house.image" class="img">
+                <p class="title" ref="addAlert">{{house.title}}</p>
+                <p class="roomDetail">{{house.room}}室/{{house.hall}}厅*{{house.area}}平方米</p>
+                <p class="price">{{house.price}}元/月</p>
+                <p class="hot">{{house.hot}}热度</p>
+            </div>
+        </div>
+    </section>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="../js/vue.js"></script>
+    <script src="../js/index.js"></script>
+</body>
+</html>

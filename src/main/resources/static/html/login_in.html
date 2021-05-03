@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LoginIn</title>
+    <link rel="stylesheet" type="text/css" href="../css/login_in.css"/>
+</head>
+<body>
+<div id="loginIn">
+    <h1>Login In</h1>
+        <input type="email" required="required" placeholder="邮箱" v-model="email"/>
+        <input type="password" required="required" placeholder="密码" v-model="password"/>
+        <button class="but" @click="submit(email,password)">登录</button>
+</div>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="../js/vue.js"></script>
+<script src="../js/login_in.js"></script>
+</body>
+</html>
