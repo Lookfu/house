@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>上传房产</title>
+    <link rel="stylesheet" type="text/css" href="../css/uploadHouse.css">
+</head>
+<body>
+    <div id="root">
+        主题<input id="title" v-model="title">
+        <p></p>
+        价格<input id="price" v-model="price">
+        <p></p>
+        面积<input id="area" v-model="area">
+        <p></p>
+        房数<input id="room" v-model="room">
+        <p></p>
+        室数<input id="hall" v-model="hall">
+        <p></p>
+        简介<input id="remarks" v-model="remarks">
+        <p></p>
+        属性<input id="properties" v-model="properties">
+        <p></p>
+        城市<input id="cityName" v-model="cityName">
+        <p></p>
+        城区<input id="communityName" v-model="communityName">
+        <p></p>
+        地址<input id="address" v-model="address">
+        <p></p>
+        状态<input id="state" v-model="state">
+        <p></p>
+       <input type="file" @change="file($event)" multiple="multiple">
+    </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="../js/vue.js"></script>
+    <script src="../js/uploadHouse.js"></script>
+</body>
+</html>

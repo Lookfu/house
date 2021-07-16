@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>主界面</title>
+    <link rel="stylesheet" type="text/css" href="../css/myHouse.css">
+</head>
+
+<body>
+    <aside class="box" id="test">
+        <button id="btn" onClick="bt()">三</button>
+        <ul>
+            <li><h3>菜单栏</h3>
+            </li>
+            <li><a href="../html/selfInf.html">房产订单</a></li>
+            <li><a href="../html/uploadHouse.html">上传房产</a></li>
+            <li><a href="../html/index.html">返回菜单</a></li>
+        </ul>
+    </aside>
+    <section id="root">
+        <h1>我的房产</h1>
+        <div id="finding">
+            城市<input  id="city" v-model="city">
+            辖区<input  id="area" v-model="area">
+            <button id="searchButton" @click="search()">查询</button>
+        </div>
+
+        <div id="houseList">
+            <div @click="send(house.id)" v-for="house of houses" class="house">
+                <img :src="house.image" class="img">
+                <p class="title" ref="addAlert">{{house.title}}</p>
+                <p class="roomDetail">{{house.room}}室/{{house.hall}}厅*{{house.area}}平方米</p>
+                <p class="price">{{house.price}}元/月</p>
+                <p class="hot">{{house.hot}}热度</p>
+            </div>
+        </div>
+        <div id="page">
+            <button @click="prePage()">上一页</button>
+                第{{page}}页
+            <button @click="nextPage()">下一页</button>
+        </div>
+    </section>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="../js/vue.js"></script>
+    <script src="../js/myHouse.js"></script>
+</body>
+</html>

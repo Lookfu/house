@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>博客信息</title>
+    <link rel="stylesheet" type="text/css" href="../css/blog.css">
+</head>
+<body>
+    <div id="root">
+        <div class="elem" @click="send(blog.id)" v-for="blog of blogs">
+            <img :src="blog.img" class="img">
+            <div class="inf">
+                <p class="title">{{blog.title}}</p>
+                <p class="tag">{{blog.tags}}</p>
+                <p class="summary">{{blog.summary}}</p>
+                <p class="time">{{blog.createTime}}</p>
+            </div>
+        </div>
+    </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="../js/vue.js"></script>
+    <script src="../js/blog.js"></script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+body {
+
+}
+.elem{
+    margin-top: 100px;
+    margin-left: 200px;
+}
+.inf{
+    margin-left: 250px;
+}
+.title{
+    width: 600px;
+    color: #000709;
+    font-weight: bold;
+    font-size: x-large;
+}
+.tag{
+    color: #fabd04;
+}
+.summary{
+    width: 600px;
+}
+.time{
+    font-size: xx-small;
+}
+.img {
+    width: 220px;
+    height: 170px;
+    float: left;
+}

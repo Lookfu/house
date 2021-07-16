@@ -1,0 +1,20 @@
+body {
+    text-align: center;
+}
+#root{
+    margin-left: 300px;
+    width: 1000px;
+}
+.title{
+    color: #000709;
+    font-weight: bold;
+    font-size: xx-large;
+}
+.tags{
+    color: #fabd04;
+    border: 1px solid;
+}
+.time{
+    font-size: xx-small;
+}
+
