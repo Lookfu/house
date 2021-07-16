@@ -14,6 +14,7 @@ public interface RedisService {
 
     void setZset(String key,Integer value,double score);
     void setAndIncreaseZset(String key,Integer value,int increaseNum);
+
     //把limit后面的数据删除掉（降序）
     void setAndIncreaseZset(String key,Integer value,int increaseNum,int limit);
 

@@ -20,10 +20,10 @@
 .img{
     width: 130px;
     height: 90px;
+    padding: 2px;
 }
 #inf{
     margin-left: 1000px;
-
 }
 #price{
     font-size:40px;

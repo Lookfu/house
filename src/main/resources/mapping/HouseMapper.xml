@@ -7,19 +7,25 @@
         select * from house limit #{limit} offset #{offset};
     </select>
 
-    <select id="houseListOfSelves" resultType="house" >
-        select * from house where state=1 limit #{limit} offset #{offset};
-    </select>
-
-    <select id="houseListOfSelling" resultType="house" >
-        select * from house where type =1 and state =1 limit #{limit} offset #{offset};
-    </select>
-
-    <select id="houseListOfRenting" resultType="house" >
-        select * from house where type =2 and state =1 limit #{limit} offset #{offset};
+    <select id="searchHouse" resultType="house">
+        select * from house where city_id=#{cityId} and community_id=#{areaId}
     </select>
 
     <select id="houseDetail" resultType="house">
         select *from house where id=#{id};
+    </select>
+
+    <update id="setState">
+        update house set state=#{state}
+        where id=#{houseId}
+    </update>
+
+    <insert id="insertItem" useGeneratedKeys="true" keyProperty="id"  keyColumn="id" parameterType="house">
+        insert into house(title,price,images,area,room,hall,remarks,properties,city_id,community_id,address,state,user_id)
+        values (#{title},#{price},#{images},#{area},#{room},#{hall},#{remarks},#{properties},#{cityId},#{communityId},#{address},#{state},#{userId})
+    </insert>
+
+    <select id="myHouse" resultType="house">
+        select * from house where user_id=#{userId} limit #{limit} offset #{offset};
     </select>
 </mapper>

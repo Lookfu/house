@@ -36,7 +36,6 @@ public class UserController {
 
     /**
      * 注册提交:1.注册验证 2 发送邮件
-     *
      */
     @PostMapping("/signIn")
     public CommonReturnType userRegister(UserVD userVD) throws BusinessException {
@@ -73,6 +72,8 @@ public class UserController {
         return CommonReturnType.create("已发送激活链接!");
     }
 
+
+    
     @GetMapping("/verify")
     public CommonReturnType verify(String key) throws BusinessException {
         String email=redisService.getString(key);

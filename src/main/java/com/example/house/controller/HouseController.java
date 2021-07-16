@@ -1,24 +1,33 @@
 package com.example.house.controller;
 
-import com.example.house.constants.RedisConstants;
+import com.example.house.constants.SessionConstants;
+import com.example.house.controller.viewobject.HouseVO;
 import com.example.house.controller.viewobject.SimpleHotHouseVO;
+import com.example.house.controller.viewobject.SimpleHouseVO;
+import com.example.house.entity.Orders;
 import com.example.house.error.BusinessException;
 import com.example.house.error.EmBusinessError;
 import com.example.house.response.CommonReturnType;
 import com.example.house.service.HouseService;
+import com.example.house.service.OrderService;
 import com.example.house.service.RedisService;
-import com.example.house.service.model.HotHouseModel;
 import com.example.house.service.model.HouseModel;
+import com.example.house.service.model.UserModel;
+import com.example.house.utils.CommonUtil;
 import com.example.house.utils.PageParam;
+import com.example.house.utils.covert.HouseConvert;
+import com.example.house.validate.entity.HouseVD;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-
-import static com.example.house.utils.covert.HouseConvert.simpleHotHouseVOCFhotHouseModel;
 
 @RestController
 @RequestMapping("/house")
@@ -27,34 +36,33 @@ public class HouseController {
     private HouseService houseService;
     @Autowired
     private RedisService redisService;
+    @Autowired
+    private OrderService orderService;
     /**
      *
      * @return
      */
     @GetMapping("/list/all")
-    public CommonReturnType houseListOfAll(int pageSize,int pageNumber){
-        PageParam pageParam=new PageParam(pageSize,pageNumber);
-        //暂时省略从HouseModel到HouseVO的转换
-        return CommonReturnType.create(
-                houseService.houseListOfAll(pageParam.getLimit(),pageParam.getOffset()));
+    public CommonReturnType houseListOfAll(int pageNumber){
+        PageParam pageParam=new PageParam(pageNumber);
+        List<HouseModel> list= houseService.houseListOfAll(pageParam.getLimit(),pageParam.getOffset());
+        List<SimpleHouseVO> res=new ArrayList<>(list.size());
+        for(HouseModel e:list){
+            SimpleHouseVO simpleHouseVO=HouseConvert.simpleHouseVOCFhouseModel(e);
+            res.add(simpleHouseVO);
+        }
+        return CommonReturnType.create(res);
     }
 
-    @GetMapping("/list/renting")
-    public CommonReturnType houseListOfRenting(int pageSize,int pageNumber){
-
-        return null;
-    }
-
-    @GetMapping("/list/selling")
-    public CommonReturnType houseListOfSelling(int pageSize,int pageNumber){
-
-        return null;
-    }
-
-    @GetMapping("/list/selves")
-    public CommonReturnType houseListOfSelves(int pageSize,int pageNumber){
-
-        return null;
+    @GetMapping("/search")
+    public CommonReturnType houseListOfRenting(String city,String area){
+        List<HouseModel> list=houseService.searchHouse(city,area);
+        List<SimpleHouseVO> res=new ArrayList<>(list.size());
+        for(HouseModel e:list){
+            SimpleHouseVO simpleHouseVO= HouseConvert.simpleHouseVOCFhouseModel(e);
+            res.add(simpleHouseVO);
+        }
+        return CommonReturnType.create(res);
     }
 
     /************************************获取房屋详情****************************************/
@@ -71,7 +79,7 @@ public class HouseController {
 
     /************************************获取热点房屋************************************/
     @GetMapping("/hotHouse")
-    public CommonReturnType hotHouse(){
+    public CommonReturnType hotHouse(int pageNumber){
         /*List<HotHouseModel> hotHouseModels=houseService.hotHouse(RedisConstants.HOT_HOUSE_SHOW);
         List<SimpleHotHouseVO> simpleHotHouseVOS=new LinkedList<>();
         for(HotHouseModel e:hotHouseModels){
@@ -80,19 +88,74 @@ public class HouseController {
         }
         return CommonReturnType.create(simpleHotHouseVOS);*/
 
-        List<SimpleHotHouseVO> simpleHotHouseVOS=new LinkedList<>();
-        for(int i=0;i<10;i++){
-            SimpleHotHouseVO simpleHotHouseVO=new SimpleHotHouseVO();
-            simpleHotHouseVO.setId(i+22);
-            simpleHotHouseVO.setArea(200);
-            simpleHotHouseVO.setRoom(3);
-            simpleHotHouseVO.setHall(1);
-            simpleHotHouseVO.setHot(1000000);
-            simpleHotHouseVO.setPrice(150);
-            simpleHotHouseVO.setTitle("万科嘉园 小三房 满两年 小区中间位置 诚心出售");
-            simpleHotHouseVO.setImage("/image/pic1.jpg");
-            simpleHotHouseVOS.add(simpleHotHouseVO);
+        return houseListOfAll(pageNumber);
+    }
+    @PostMapping("/rentHouse")
+    public CommonReturnType rentHouse(HttpServletRequest request,long houseId,String note,int months) throws BusinessException {
+        UserModel userModel=(UserModel)request.getSession().getAttribute(SessionConstants.USER);
+        HouseModel houseModel=houseService.houseDetail(houseId);
+        if(houseModel==null){
+            throw new BusinessException(EmBusinessError.NORMAL_ERROR.setErrorMsg("房产不存在"));
         }
-        return CommonReturnType.create(simpleHotHouseVOS);
+        if(houseModel.getState()==2){
+            throw new BusinessException(EmBusinessError.NORMAL_ERROR.setErrorMsg("房产已下架"));
+        }
+        Orders orders =new Orders();
+        orders.setUserId(userModel.getId());
+        orders.setId(CommonUtil.getOderId());
+        orders.setConfirmed(0);
+        orders.setHouseId(houseId);
+        orders.setPrice(new BigDecimal(houseModel.getPrice()));
+        orders.setNote(note);
+        orders.setMonths(months);
+        int res=orderService.insertItem(orders);
+        if(res==0){
+            throw new BusinessException(EmBusinessError.NORMAL_ERROR.setErrorMsg("产生订单失败"));
+        }
+        res=houseService.unSellHouse(houseId);
+        if(res>0){
+            return CommonReturnType.create("租入成功！");
+        }else{
+            throw new BusinessException(EmBusinessError.NORMAL_ERROR.setErrorMsg("设置房产状态失败"));
+        }
+    }
+
+    @PostMapping("/addHouse")
+    public CommonReturnType addHouse(HouseVD houseVD,HttpServletRequest request) throws BusinessException {
+        UserModel userModel=(UserModel)request.getSession().getAttribute(SessionConstants.USER);
+        long houseId=houseService.addHouse(HouseConvert.houseModelCFHouseVD(houseVD,userModel.getId()));
+        for(int i=1;i<=houseVD.getFiles().length;i++){
+            boolean isSuccess=saveFile(houseVD.getFiles()[i-1],"E:\\Workspace\\ideaWorkspace\\house\\src\\main\\resources\\static\\image\\house\\"+houseId+"\\"+"pic"+i+".png");
+            if(!isSuccess){
+                throw new BusinessException(EmBusinessError.NORMAL_ERROR.setErrorMsg("图片保存失败！"));
+            }
+        }
+        return CommonReturnType.create("上传完成！");
+    }
+
+    @GetMapping("/myHouse")
+    public CommonReturnType myHouse(int pageNumber,HttpServletRequest request){
+        UserModel userModel=(UserModel)request.getSession().getAttribute(SessionConstants.USER);
+        PageParam pageParam=new PageParam(pageNumber);
+        List<HouseModel> list=houseService.myHouse(userModel.getId(),pageParam.getLimit(),pageParam.getOffset());
+        List<SimpleHouseVO> res=new ArrayList<>(list.size());
+        for(HouseModel e:list){
+            res.add(HouseConvert.simpleHouseVOCFhouseModel(e));
+        }
+        return CommonReturnType.create(res);
+    }
+
+    private boolean saveFile(MultipartFile multipartFile,String filePath){
+        File desFile=new File(filePath);
+        if(!desFile.getParentFile().exists()){
+            desFile.mkdirs();
+        }
+        try {
+            multipartFile.transferTo(desFile);
+        }catch (IllegalStateException | IOException e){
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 }

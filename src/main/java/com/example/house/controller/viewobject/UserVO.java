@@ -11,13 +11,26 @@ public class UserVO {
     private String phone;
     private String name;
     private String realName;
-    private Integer type;//普通用户1，经纪人2
     private Date createTime;
     private Integer enable;
     private String  avatar;
-    private Long   agencyId;
     private String aboutMe;
-    private String agencyName;
+
+    public Integer getRealId() {
+        return realId;
+    }
+
+    public void setRealId(Integer realId) {
+        this.realId = realId;
+    }
+
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
+    }
 
     public Long getId() {
         return id;
@@ -51,14 +64,6 @@ public class UserVO {
         this.name = name;
     }
 
-    public Integer getType() {
-        return type;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
-    }
-
     public Date getCreateTime() {
         return createTime;
     }
@@ -83,27 +88,11 @@ public class UserVO {
         this.avatar = avatar;
     }
 
-    public Long getAgencyId() {
-        return agencyId;
-    }
-
-    public void setAgencyId(Long agencyId) {
-        this.agencyId = agencyId;
-    }
-
     public String getAboutMe() {
         return aboutMe;
     }
 
     public void setAboutMe(String aboutMe) {
         this.aboutMe = aboutMe;
-    }
-
-    public String getAgencyName() {
-        return agencyName;
-    }
-
-    public void setAgencyName(String agencyName) {
-        this.agencyName = agencyName;
     }
 }

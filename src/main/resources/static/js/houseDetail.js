@@ -33,7 +33,6 @@ new Vue({
                 if(jsonObj.status=="fail"&&jsonObj.data.errorCode=="20002"){
                     alert(jsonObj.data.errorMsg+" "+jsonObj.data.errorCode);
                     window.location.href="../html/login_in.html";
-                    return ;
                 }else if(jsonObj.status=="fail"){
                     alert(jsonObj.data.errorMsg+" "+jsonObj.data.errorCode);
                 }else{
@@ -41,12 +40,17 @@ new Vue({
                 }
             });
         },
+        rent:function (img,houseId,price){
+            window.localStorage.setItem('img',img);
+            window.localStorage.setItem('houseId',houseId);
+            window.localStorage.setItem('price',price);
+            window.location.href="../html/orderDetail.html";
+        },
     },
     mounted:function (){
         var _this=this;
         var id=window.localStorage.getItem('id');
         _this.houseId=id;
-        //window.localStorage.removeItem('id');
         axios({
             method:'get',
             url:'http://localhost:8080/house/detail',

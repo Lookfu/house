@@ -64,7 +64,6 @@ public class RedisServiceImpl implements RedisService {
         Map<Integer,Integer> map=new HashMap<>();
         for(Integer integer:set){
             map.put(integer,redisTemplate.opsForZSet().score(key,integer).intValue());
-            // System.out.println(redisTemplate.opsForZSet().score(key,integer)+" "+integer);
         }
         return map;
     }

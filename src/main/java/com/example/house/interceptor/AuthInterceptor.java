@@ -20,7 +20,7 @@ public class AuthInterceptor implements HandlerInterceptor{
 			throws Exception {
 	    String reqUri =	request.getRequestURI();
 	    //判断是否是静态资源请求或者error请求
-	    if (reqUri.startsWith("/static") || reqUri.startsWith("/error") ) {
+	    if (reqUri.startsWith("/html") || reqUri.startsWith("/error") ) {
 			return true;
 		}
 	    //参数true表示不存在session时自动创建

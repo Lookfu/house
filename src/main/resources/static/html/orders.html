@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>订单</title>
+    <link rel="stylesheet" type="text/css" href="../css/orders.css">
+</head>
+<body>
+    <table border="1" id="table">
+        <tr>
+            <th>订单ID</th>
+            <th>用户ID</th>
+            <th>房产ID</th>
+            <th>单价</th>
+            <th>月数</th>
+            <th>是否确认</th>
+            <th>备注</th>
+            <th>订单时间</th>
+        </tr>
+        <tr v-for="item of items">
+            <td>{{item.id}}</td>
+            <td>{{item.userId}}</td>
+            <td>{{item.houseId}}</td>
+            <td>{{item.price}}</td>
+            <td>{{item.months}}</td>
+            <td>{{item.confirmed}}</td>
+            <td>{{item.note}}</td>
+            <td>{{item.createdTime}}</td>
+        </tr>
+    </table>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="../js/vue.js"></script>
+    <script src="../js/orders.js"></script>
+</body>
+</html>

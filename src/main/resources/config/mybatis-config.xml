@@ -11,5 +11,7 @@
         <typeAlias alias="user" type="com.example.house.entity.User"/>
         <typeAlias alias="house" type="com.example.house.entity.House"/>
         <typeAlias alias="houseUser" type="com.example.house.entity.HouseUser"/>
+        <typeAlias alias="orders" type="com.example.house.entity.Orders"/>
+        <typeAlias alias="blog" type="com.example.house.entity.Blog"/>
     </typeAliases>
 </configuration>

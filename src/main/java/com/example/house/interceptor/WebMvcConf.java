@@ -17,8 +17,11 @@ public class WebMvcConf implements WebMvcConfigurer {
 		 * 添加的顺序表示拦截顺序
 		 */
 		registry.addInterceptor(authInterceptor)
-				.excludePathPatterns("/static")//authInterceptor这个拦截器不拦截static，除此之外的其他都拦截
-				.addPathPatterns("/houseUser/likeHouse").addPathPatterns("/user/inf");
+				.excludePathPatterns("/html")//authInterceptor这个拦截器不拦截static，除此之外的其他都拦截
+				.addPathPatterns("/houseUser/likeHouse").addPathPatterns("/user/inf")
+				.addPathPatterns("/houseUser/myLikeHouses").addPathPatterns("/house/rentHouse")
+				.addPathPatterns("/order/list").addPathPatterns("/house/myHouse")
+				.addPathPatterns("/house/addHouse");
 	}
 	
 }

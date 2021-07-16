@@ -4,13 +4,12 @@ package com.example.house.controller.viewobject;
  * 只包含简要属性的房子VO
  */
 public class SimpleHouseVO {
-    private Integer id;
+    private Long id;
     private Integer price;
     private String  title;
     private String  image;
     private Integer room;
     private Integer hall;
-    private Integer baths;
     private Integer area;
 
     public Integer getArea() {
@@ -21,11 +20,11 @@ public class SimpleHouseVO {
         this.area = area;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -69,11 +68,4 @@ public class SimpleHouseVO {
         this.hall = hall;
     }
 
-    public Integer getBaths() {
-        return baths;
-    }
-
-    public void setBaths(Integer baths) {
-        this.baths = baths;
-    }
 }

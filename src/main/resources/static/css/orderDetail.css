@@ -1,0 +1,18 @@
+body {
+    margin-top: 100px;
+    text-align: center;
+}
+
+#inf {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.img {
+    width: 300px;
+    height: 200px;
+}
+#confirm{
+    margin-top: 10px;
+    background-color: #f8f2f2;
+}

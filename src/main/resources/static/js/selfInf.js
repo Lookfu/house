@@ -8,7 +8,6 @@ new Vue({
         name:"",
         phone:"",
         email:"",
-        type:"",
         aboutMe:"",
     },
     methods:{
@@ -23,7 +22,7 @@ new Vue({
             url:'http://localhost:8080/user/inf',
         }).then(function(res){
             var jsonObj = res.data;
-            if(jsonObj.status=="fail"){
+            if(jsonObj.status=="fail"&&jsonObj.data.errorCode=="20002"){
                 alert(jsonObj.data.errorMsg+" "+jsonObj.data.errorCode);
                 window.location.href="../html/login_in.html";
                 return ;
@@ -34,12 +33,6 @@ new Vue({
             _this.email=jsonObj.data.email;
             _this.aboutMe=jsonObj.data.aboutMe;
             _this.img=jsonObj.data.avatar;
-            alert(jsonObj.data.avatar);
-            if(jsonObj.data.type==0){
-                _this.type="普通用户";
-            }else{
-                _this.type="房产经纪人";
-            }
         });
     }
 })

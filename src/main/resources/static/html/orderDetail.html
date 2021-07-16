@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>确认订单</title>
+    <link rel="stylesheet" type="text/css" href="../css/orderDetail.css">
+</head>
+<body>
+    <div id="inf">
+        <img :src="img" class="img">
+        <div id="selfInf">
+            <p id="price">单价:{{price}}</p>
+            <p id="allPrice">总价:{{allPrice}}</p>
+            月数：<select  class="fl" v-model="ProductActive"  @change="changeProduct($event)" >
+                <option v-for="(item,index) in productList" :key="index" :value='item.id'>{{item.title}}</option>
+            </select>
+            <p></p>
+            注备<input v-model="note">
+        </div>
+        <button id="confirm" @click="confirm()">确认订单</button>
+    </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="../js/vue.js"></script>
+    <script src="../js/orderDetail.js"></script>
+</body>
+</html>

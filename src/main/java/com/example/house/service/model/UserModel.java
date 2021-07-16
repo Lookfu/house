@@ -6,20 +6,32 @@ import java.util.Date;
 
 public class UserModel {
     private Long id;
+    private Integer realId;
     private String email;
     private String phone;
     private String name;
+    private String realName;
     private String password;
-    private Integer type;//普通用户1，经纪人2
     private Date createTime;
     private Integer enable;
     private String  avatar;
-    private MultipartFile avatarFile;
-    private String newPassword;
-    private String key;
-    private Long   agencyId;
     private String aboutMe;
-    private String agencyName;
+
+    public Integer getRealId() {
+        return realId;
+    }
+
+    public void setRealId(Integer realId) {
+        this.realId = realId;
+    }
+
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
+    }
 
     public Long getId() {
         return id;
@@ -61,14 +73,6 @@ public class UserModel {
         this.password = password;
     }
 
-    public Integer getType() {
-        return type;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
-    }
-
     public Date getCreateTime() {
         return createTime;
     }
@@ -93,38 +97,6 @@ public class UserModel {
         this.avatar = avatar;
     }
 
-    public MultipartFile getAvatarFile() {
-        return avatarFile;
-    }
-
-    public void setAvatarFile(MultipartFile avatarFile) {
-        this.avatarFile = avatarFile;
-    }
-
-    public String getNewPassword() {
-        return newPassword;
-    }
-
-    public void setNewPassword(String newPassword) {
-        this.newPassword = newPassword;
-    }
-
-    public String getKey() {
-        return key;
-    }
-
-    public void setKey(String key) {
-        this.key = key;
-    }
-
-    public Long getAgencyId() {
-        return agencyId;
-    }
-
-    public void setAgencyId(Long agencyId) {
-        this.agencyId = agencyId;
-    }
-
     public String getAboutMe() {
         return aboutMe;
     }
@@ -133,11 +105,4 @@ public class UserModel {
         this.aboutMe = aboutMe;
     }
 
-    public String getAgencyName() {
-        return agencyName;
-    }
-
-    public void setAgencyName(String agencyName) {
-        this.agencyName = agencyName;
-    }
 }

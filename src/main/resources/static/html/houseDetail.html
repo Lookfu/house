@@ -26,7 +26,7 @@
             </div>
             <div id="button">
                 <button class="button" @click="like(houseId)">收藏</button>
-                <button class="button" :disabled="enable">租房</button>
+                <button class="button" @click="rent(img,houseId,price)" :disabled="enable">租房</button>
             </div>
         </div>
     </div>
