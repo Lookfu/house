@@ -2,3 +2,6 @@ struct{
   int a;
   int b;
 }
+struct{
+ int c;
+}
